@@ -3,7 +3,7 @@ NodeBB Dockerfiles
 
 NodeBB is built with nodejs, and is made to be fast and powerful. For your convenience, we currently offer CentOS and Ubuntu builds. 
 
-You can view our official builds on [Docker Hub Regitry](https://registry.hub.docker.com/u/nodebb/docker/) as well.
+You can view our official builds on [Docker Hub Registry](https://registry.hub.docker.com/u/nodebb/docker/) as well.
 
 ### Usage
 
