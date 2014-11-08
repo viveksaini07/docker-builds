@@ -7,7 +7,7 @@ RUN yum -y install epel-release tar ; yum clean all
 RUN yum -y install wget ; yum clean all
 RUN yum -y groupinstall "Development Tools"
 RUN yum -y install nodejs git ImageMagick npm
-RUN yum -y install openssl openssl-devel;
+RUN yum -y install openssl openssl-devel
 
 # clone nodebb and install it
 RUN cd /opt ; git clone https://github.com/NodeBB/NodeBB nodebb
