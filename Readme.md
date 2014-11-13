@@ -1,31 +1,32 @@
 NodeBB Dockerfiles
 =============
 
-### Base Docker Image
+NodeBB is built with nodejs, and is made to be fast and powerful. For your convenience, we currently offer CentOS and Ubuntu builds. 
 
-* [nodebb-docker/centos-redis](http://github.com/xaoseric/nodebb-docker/centos-redis)
-
-### Requirements
-
-* [Docker](https://www.docker.com/)
+You can view our official builds on [Docker Hub Registry](https://registry.hub.docker.com/u/nodebb/docker/) as well.
 
 ### Usage
 
-First, run a Redis instance on your machine. It will automatically expose the `/data` volume.
+To get started with running NodeBB using Docker, you will want to run a redis instance.
 
-`docker run --name my-forum-redis -d -p 6379:6379 nodebb/docker:centos-redis`
+    docker run --name my-forum-redis -d -p 6379:6379 nodebb/docker:centos-redis
+    docker run --name my-forum-redis -d -p 6379:6379 nodebb/docker:ubuntu-redis
 
-Next, launch the NodeBB instance from this repository, so it links with the just-launched Redis instance.
+Next, launch the NodeBB instance, so it links with the just-launched Redis instance.
 
-`docker run --name dockerdev-nodebb --link dockerdev-redis:redis -P -t -i nodebb/docker:centos`
+    docker run --name dockerdev-nodebb --link dockerdev-redis:redis -p 80:80 -p 443:443 -p 4567:4567 -P -t -i nodebb/docker:centos
 
-You will be asked to configure your NodeBB instance, as no config file was found. Simply press enter for all settings except Redis hostname, which should be `redis` as it is linked using the `--linked` parameter to our Redis instance, and the administrator username, e-mail and password. The default port of nodebb, and ports 80 and 443 have been exposed for your convenienc. You can keep the default nodebb port or change it.
+    docker run --name dockerdev-nodebb --link dockerdev-redis:redis -p 80:80 -p 443:443 -p 4567:4567 -P -t -i nodebb/docker:ubuntu 
+
+You will be asked to configure your NodeBB instance, as no config file was found. Simply press enter for all settings except Redis hostname, which should be `redis` as it is linked using the `--linked` parameter to our Redis instance, and the administrator username, e-mail and password. 
+
+The default port of nodebb is 4567. Ports 80, and 443 have also been exposed for your convenience. You can keep the default nodebb port or change it.
 
 NodeBB will launch the setup and automatically close. Next, simply start the instance again. It will this time find a config file and start as a daemon.
 
-`docker start my-forum-nodebb`
+    docker start my-forum-nodebb
 
-Your NodeBB instance will be accessible on port `4567`. Check `docker ps` for more details.
+Your NodeBB instance will be accessible on the port you selected during setup. Check `docker ps` for more details.
 
 ### Backup/Restoring
 
