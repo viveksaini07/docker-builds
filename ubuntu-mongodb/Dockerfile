@@ -15,6 +15,10 @@ RUN curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.7.tgz  \
 && ln -s mongodb-linux-x86_64-3.0.7 mongodb \
 && mkdir -p /data/db
 
+RUN mkdir -p /data/log
+
+ADD ["rs.conf","/usr/local/mongodb/rs.conf"]
+
 # Define mountable directories.
 VOLUME ["/data/db"]
 
@@ -26,4 +30,4 @@ EXPOSE 27017
 ENV PATH /usr/local/mongodb/bin/:$PATH
 
 #entrypoint
-CMD ["mongod"]
+CMD ["mongod","--config","/usr/local/mongodb/rs.conf"]
